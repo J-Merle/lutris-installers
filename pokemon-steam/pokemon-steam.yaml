@@ -1,0 +1,25 @@
+name: pokemon-steam
+runner: wine
+version: "Pokémon steam from archive"
+game_slug: pokemon-steam
+slug: pokemon-steam-installer
+
+script:
+  game:
+    exe: $GAMEDIR/Launcher.exe
+    prefix: $GAMEDIR
+  files:
+  - archive: "N/A:Select the game archive"
+  installer:
+  - extract:
+      file: archive
+  - task:
+      name: create_prefix
+      description: Creating Wine prefix
+      prefix: $GAMEDIR
+  - task:
+      executable: $GAMEDIR/windowsdesktop-runtime-3.1.2-win-x64.exe
+      name: wineexec
+      prefix: $GAMEDIR
+  wine:
+    dxvk: false
